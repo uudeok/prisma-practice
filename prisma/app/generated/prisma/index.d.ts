@@ -2069,7 +2069,7 @@ export namespace Prisma {
     email: string
     name: string
     profile_img?: string | null
-    created_at: Date | string
+    created_at?: Date | string
   }
 
   export type UserEntityUncheckedCreateInput = {
@@ -2077,7 +2077,7 @@ export namespace Prisma {
     email: string
     name: string
     profile_img?: string | null
-    created_at: Date | string
+    created_at?: Date | string
   }
 
   export type UserEntityUpdateInput = {
@@ -2100,7 +2100,7 @@ export namespace Prisma {
     email: string
     name: string
     profile_img?: string | null
-    created_at: Date | string
+    created_at?: Date | string
   }
 
   export type UserEntityUpdateManyMutationInput = {
