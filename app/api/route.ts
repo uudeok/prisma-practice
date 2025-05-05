@@ -1,13 +1,21 @@
+import { PrUserRepository } from '@/back/user/infra/PrUserRepository';
+import { CreateUserUsecase } from '@/back/user/usecases/CreateUserUsecase';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
     try {
-        console.log(req);
+        const body = await req.json();
 
-        // 서버에 요청을 보내는 로직 추후 작성
+        const repository = new PrUserRepository();
+        const createUserUsecase = new CreateUserUsecase(repository);
+        const result = await createUserUsecase.execute(body);
 
-        return NextResponse.json({ message: '성공했습니다' });
+        console.log('route', result);
+
+        return NextResponse.json(result);
     } catch (error) {
-        console.log(error);
+        console.error(error);
+
+        return NextResponse.json({ message: '에러 발생' }, { status: 500 });
     }
 }
