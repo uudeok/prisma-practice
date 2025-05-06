@@ -1,12 +1,14 @@
-import { getUserByIdAction } from '@/back/user/actions/userActions';
+import { getUserAction } from '@/back/user/actions/userActions';
+
+import SignupForm from './SingupForm';
 
 export default async function Home() {
-    // const user = await getUserByIdAction(1);
-    // console.log(11, user);
+    const user = await getUserAction(8);
+    console.log('user : ', user);
 
     return (
         <div>
-            <form></form>
+            <SignupForm />
         </div>
     );
 }

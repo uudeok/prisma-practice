@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { UserRepository } from '../repositories/UserRepository';
+import { UserRepository } from '../domain/repositories/UserRepository';
 import { UserDto } from './dto/UserDto';
 
 export class GetUserUsecase {
@@ -9,7 +9,7 @@ export class GetUserUsecase {
         const user = await this.userRepository.findById(id);
 
         if (!user) {
-            throw Error('찾는 데이터가 없습니다.');
+            throw '유저 권한이 없습니다';
         }
 
         return {
