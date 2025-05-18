@@ -128,6 +128,13 @@ exports.Prisma.UserEntityScalarFieldEnum = {
   created_at: 'created_at'
 };
 
+exports.Prisma.PostEntityScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  title: 'title',
+  created_at: 'created_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -145,7 +152,8 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  UserEntity: 'UserEntity'
+  UserEntity: 'UserEntity',
+  PostEntity: 'PostEntity'
 };
 
 /**

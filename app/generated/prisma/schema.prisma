@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String            @id @default(uuid())
+  nickname        String
+  email           String            @unique
+  profileImage    String?           @map("profile_image")
+  introduction    String?
+  backgroundImg   String?           @map("background_img")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  deletedAt       DateTime?         @map("deleted_at")
+  likes           BlogLike[]
+  blogPost        BlogPost[]
+  bookMark        BookMark[]
+  comments        Comment[]
+  notificationBox NotificationBox[]
+  userProvider    UserProvider[]
+
+  @@map("user")
+}
+
+model BlogPost {
+  id             Int             @id @default(autoincrement())
+  userId         String          @map("user_id")
+  title          String
+  content        String
+  tag            String?
+  createAt       DateTime        @default(now()) @map("create_at")
+  updateAt       DateTime        @updatedAt @map("update_at")
+  aiSummary      String          @map("ai_summary")
+  isPublic       Boolean         @default(true) @map("is_public")
+  likes          BlogLike[]
+  user           User            @relation(fields: [userId], references: [id])
+  blogPostImages BlogPostImage[]
+  bookMark       BookMark[]
+  comments       Comment[]
+  notification   Notification[]
+
+  @@map("blog_post")
+}
+
+model NotificationBox {
+  id           Int            @id @default(autoincrement())
+  userId       String
+  isRead       Boolean        @default(false) @map("is_read")
+  notification Notification[]
+  user         User           @relation(fields: [userId], references: [id])
+
+  @@map("notification_box")
+}
+
+model Notification {
+  id                Int             @id @default(autoincrement())
+  blogId            Int             @map("blog_id")
+  notificationBoxId Int             @map("notification_id")
+  type              String
+  blogs             BlogPost        @relation(fields: [blogId], references: [id])
+  notification      NotificationBox @relation(fields: [notificationBoxId], references: [id])
+
+  @@map("notification")
+}
+
+model BookMark {
+  id       Int      @id @default(autoincrement())
+  blogId   Int      @map("blog_id")
+  userId   String   @map("user_id")
+  createAt DateTime @default(now()) @map("create_at")
+  blogs    BlogPost @relation(fields: [blogId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@map("bookmark")
+}
+
+model BlogLike {
+  id     Int      @id @default(autoincrement())
+  blogId Int      @map("blog_id")
+  userId String   @map("user_id")
+  blogs  BlogPost @relation(fields: [blogId], references: [id])
+  user   User     @relation(fields: [userId], references: [id])
+
+  @@map("blog_like")
+}
+
+model Comment {
+  id       Int      @id @default(autoincrement())
+  blogId   Int      @map("blog_id")
+  userId   String   @map("user_id")
+  content  String
+  createAt DateTime @default(now()) @map("create_at")
+  deleteAt DateTime @default(now()) @map("delete_at")
+  blogs    BlogPost @relation(fields: [blogId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@map("comment")
+}
+
+model BlogPostImage {
+  id     Int      @id @default(autoincrement())
+  blogId Int      @map("blog_id")
+  image  String?
+  blogs  BlogPost @relation(fields: [blogId], references: [id])
+
+  @@map("blogpost_image")
+}
+
+model Subscribe {
+  id         Int      @id @default(autoincrement())
+  requestId  String?  @map("request_id")
+  responseId String?  @map("response_id")
+  createAt   DateTime @default(now()) @map("create_at")
+
+  @@map("subscribe")
+}
+
+model Provider {
+  id           Int            @id @default(autoincrement())
+  name         String         @unique
+  userProvider UserProvider[]
+
+  @@map("provider")
+}
+
+model UserProvider {
+  id         Int      @id @default(autoincrement())
+  providerId Int      @map("provider_id")
+  userId     String   @map("user_id")
+  provider   Provider @relation(fields: [providerId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@map("user_provider")
+}

@@ -1,0 +1,31 @@
+.layout {
+    gap: 15px;
+    color: black;
+    font-size: calc(var(--content-size) * 0.75);
+    width: 100%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.hasError {
+    color: var(--cancel-button-color);
+    text-align: center;
+    display: 'inline-block';
+    margin-top: 10px;
+}
+
+.label {
+    display: flex;
+    min-width: 80px;
+    align-items: center;
+    color: gray;
+}

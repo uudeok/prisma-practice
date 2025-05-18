@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type UserEntity = $Result.DefaultSelection<Prisma.$UserEntityPayload>
+/**
+ * Model PostEntity
+ * 
+ */
+export type PostEntity = $Result.DefaultSelection<Prisma.$PostEntityPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -153,6 +158,16 @@ export class PrismaClient<
     * ```
     */
   get userEntity(): Prisma.UserEntityDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.postEntity`: Exposes CRUD operations for the **PostEntity** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PostEntities
+    * const postEntities = await prisma.postEntity.findMany()
+    * ```
+    */
+  get postEntity(): Prisma.PostEntityDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +608,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    UserEntity: 'UserEntity'
+    UserEntity: 'UserEntity',
+    PostEntity: 'PostEntity'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,7 +628,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "userEntity"
+      modelProps: "userEntity" | "postEntity"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -687,6 +703,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserEntityCountArgs<ExtArgs>
             result: $Utils.Optional<UserEntityCountAggregateOutputType> | number
+          }
+        }
+      }
+      PostEntity: {
+        payload: Prisma.$PostEntityPayload<ExtArgs>
+        fields: Prisma.PostEntityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PostEntityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostEntityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PostEntityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostEntityPayload>
+          }
+          findFirst: {
+            args: Prisma.PostEntityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostEntityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PostEntityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostEntityPayload>
+          }
+          findMany: {
+            args: Prisma.PostEntityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostEntityPayload>[]
+          }
+          create: {
+            args: Prisma.PostEntityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostEntityPayload>
+          }
+          createMany: {
+            args: Prisma.PostEntityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PostEntityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostEntityPayload>[]
+          }
+          delete: {
+            args: Prisma.PostEntityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostEntityPayload>
+          }
+          update: {
+            args: Prisma.PostEntityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostEntityPayload>
+          }
+          deleteMany: {
+            args: Prisma.PostEntityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PostEntityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PostEntityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostEntityPayload>[]
+          }
+          upsert: {
+            args: Prisma.PostEntityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostEntityPayload>
+          }
+          aggregate: {
+            args: Prisma.PostEntityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePostEntity>
+          }
+          groupBy: {
+            args: Prisma.PostEntityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PostEntityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PostEntityCountArgs<ExtArgs>
+            result: $Utils.Optional<PostEntityCountAggregateOutputType> | number
           }
         }
       }
@@ -775,6 +865,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     userEntity?: UserEntityOmit
+    postEntity?: PostEntityOmit
   }
 
   /* Types for Logging */
@@ -1899,6 +1990,1022 @@ export namespace Prisma {
 
 
   /**
+   * Model PostEntity
+   */
+
+  export type AggregatePostEntity = {
+    _count: PostEntityCountAggregateOutputType | null
+    _avg: PostEntityAvgAggregateOutputType | null
+    _sum: PostEntitySumAggregateOutputType | null
+    _min: PostEntityMinAggregateOutputType | null
+    _max: PostEntityMaxAggregateOutputType | null
+  }
+
+  export type PostEntityAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type PostEntitySumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type PostEntityMinAggregateOutputType = {
+    id: number | null
+    content: string | null
+    title: string | null
+    created_at: Date | null
+  }
+
+  export type PostEntityMaxAggregateOutputType = {
+    id: number | null
+    content: string | null
+    title: string | null
+    created_at: Date | null
+  }
+
+  export type PostEntityCountAggregateOutputType = {
+    id: number
+    content: number
+    title: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type PostEntityAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type PostEntitySumAggregateInputType = {
+    id?: true
+  }
+
+  export type PostEntityMinAggregateInputType = {
+    id?: true
+    content?: true
+    title?: true
+    created_at?: true
+  }
+
+  export type PostEntityMaxAggregateInputType = {
+    id?: true
+    content?: true
+    title?: true
+    created_at?: true
+  }
+
+  export type PostEntityCountAggregateInputType = {
+    id?: true
+    content?: true
+    title?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type PostEntityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PostEntity to aggregate.
+     */
+    where?: PostEntityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PostEntities to fetch.
+     */
+    orderBy?: PostEntityOrderByWithRelationInput | PostEntityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PostEntityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PostEntities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PostEntities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PostEntities
+    **/
+    _count?: true | PostEntityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PostEntityAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PostEntitySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PostEntityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PostEntityMaxAggregateInputType
+  }
+
+  export type GetPostEntityAggregateType<T extends PostEntityAggregateArgs> = {
+        [P in keyof T & keyof AggregatePostEntity]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePostEntity[P]>
+      : GetScalarType<T[P], AggregatePostEntity[P]>
+  }
+
+
+
+
+  export type PostEntityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PostEntityWhereInput
+    orderBy?: PostEntityOrderByWithAggregationInput | PostEntityOrderByWithAggregationInput[]
+    by: PostEntityScalarFieldEnum[] | PostEntityScalarFieldEnum
+    having?: PostEntityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PostEntityCountAggregateInputType | true
+    _avg?: PostEntityAvgAggregateInputType
+    _sum?: PostEntitySumAggregateInputType
+    _min?: PostEntityMinAggregateInputType
+    _max?: PostEntityMaxAggregateInputType
+  }
+
+  export type PostEntityGroupByOutputType = {
+    id: number
+    content: string
+    title: string
+    created_at: Date
+    _count: PostEntityCountAggregateOutputType | null
+    _avg: PostEntityAvgAggregateOutputType | null
+    _sum: PostEntitySumAggregateOutputType | null
+    _min: PostEntityMinAggregateOutputType | null
+    _max: PostEntityMaxAggregateOutputType | null
+  }
+
+  type GetPostEntityGroupByPayload<T extends PostEntityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PostEntityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PostEntityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PostEntityGroupByOutputType[P]>
+            : GetScalarType<T[P], PostEntityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PostEntitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    title?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["postEntity"]>
+
+  export type PostEntitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    title?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["postEntity"]>
+
+  export type PostEntitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    title?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["postEntity"]>
+
+  export type PostEntitySelectScalar = {
+    id?: boolean
+    content?: boolean
+    title?: boolean
+    created_at?: boolean
+  }
+
+  export type PostEntityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "title" | "created_at", ExtArgs["result"]["postEntity"]>
+
+  export type $PostEntityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PostEntity"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      content: string
+      title: string
+      created_at: Date
+    }, ExtArgs["result"]["postEntity"]>
+    composites: {}
+  }
+
+  type PostEntityGetPayload<S extends boolean | null | undefined | PostEntityDefaultArgs> = $Result.GetResult<Prisma.$PostEntityPayload, S>
+
+  type PostEntityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PostEntityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PostEntityCountAggregateInputType | true
+    }
+
+  export interface PostEntityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PostEntity'], meta: { name: 'PostEntity' } }
+    /**
+     * Find zero or one PostEntity that matches the filter.
+     * @param {PostEntityFindUniqueArgs} args - Arguments to find a PostEntity
+     * @example
+     * // Get one PostEntity
+     * const postEntity = await prisma.postEntity.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PostEntityFindUniqueArgs>(args: SelectSubset<T, PostEntityFindUniqueArgs<ExtArgs>>): Prisma__PostEntityClient<$Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PostEntity that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PostEntityFindUniqueOrThrowArgs} args - Arguments to find a PostEntity
+     * @example
+     * // Get one PostEntity
+     * const postEntity = await prisma.postEntity.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PostEntityFindUniqueOrThrowArgs>(args: SelectSubset<T, PostEntityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PostEntityClient<$Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PostEntity that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostEntityFindFirstArgs} args - Arguments to find a PostEntity
+     * @example
+     * // Get one PostEntity
+     * const postEntity = await prisma.postEntity.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PostEntityFindFirstArgs>(args?: SelectSubset<T, PostEntityFindFirstArgs<ExtArgs>>): Prisma__PostEntityClient<$Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PostEntity that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostEntityFindFirstOrThrowArgs} args - Arguments to find a PostEntity
+     * @example
+     * // Get one PostEntity
+     * const postEntity = await prisma.postEntity.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PostEntityFindFirstOrThrowArgs>(args?: SelectSubset<T, PostEntityFindFirstOrThrowArgs<ExtArgs>>): Prisma__PostEntityClient<$Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PostEntities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostEntityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PostEntities
+     * const postEntities = await prisma.postEntity.findMany()
+     * 
+     * // Get first 10 PostEntities
+     * const postEntities = await prisma.postEntity.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const postEntityWithIdOnly = await prisma.postEntity.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PostEntityFindManyArgs>(args?: SelectSubset<T, PostEntityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PostEntity.
+     * @param {PostEntityCreateArgs} args - Arguments to create a PostEntity.
+     * @example
+     * // Create one PostEntity
+     * const PostEntity = await prisma.postEntity.create({
+     *   data: {
+     *     // ... data to create a PostEntity
+     *   }
+     * })
+     * 
+     */
+    create<T extends PostEntityCreateArgs>(args: SelectSubset<T, PostEntityCreateArgs<ExtArgs>>): Prisma__PostEntityClient<$Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PostEntities.
+     * @param {PostEntityCreateManyArgs} args - Arguments to create many PostEntities.
+     * @example
+     * // Create many PostEntities
+     * const postEntity = await prisma.postEntity.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PostEntityCreateManyArgs>(args?: SelectSubset<T, PostEntityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PostEntities and returns the data saved in the database.
+     * @param {PostEntityCreateManyAndReturnArgs} args - Arguments to create many PostEntities.
+     * @example
+     * // Create many PostEntities
+     * const postEntity = await prisma.postEntity.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PostEntities and only return the `id`
+     * const postEntityWithIdOnly = await prisma.postEntity.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PostEntityCreateManyAndReturnArgs>(args?: SelectSubset<T, PostEntityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PostEntity.
+     * @param {PostEntityDeleteArgs} args - Arguments to delete one PostEntity.
+     * @example
+     * // Delete one PostEntity
+     * const PostEntity = await prisma.postEntity.delete({
+     *   where: {
+     *     // ... filter to delete one PostEntity
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PostEntityDeleteArgs>(args: SelectSubset<T, PostEntityDeleteArgs<ExtArgs>>): Prisma__PostEntityClient<$Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PostEntity.
+     * @param {PostEntityUpdateArgs} args - Arguments to update one PostEntity.
+     * @example
+     * // Update one PostEntity
+     * const postEntity = await prisma.postEntity.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PostEntityUpdateArgs>(args: SelectSubset<T, PostEntityUpdateArgs<ExtArgs>>): Prisma__PostEntityClient<$Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PostEntities.
+     * @param {PostEntityDeleteManyArgs} args - Arguments to filter PostEntities to delete.
+     * @example
+     * // Delete a few PostEntities
+     * const { count } = await prisma.postEntity.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PostEntityDeleteManyArgs>(args?: SelectSubset<T, PostEntityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PostEntities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostEntityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PostEntities
+     * const postEntity = await prisma.postEntity.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PostEntityUpdateManyArgs>(args: SelectSubset<T, PostEntityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PostEntities and returns the data updated in the database.
+     * @param {PostEntityUpdateManyAndReturnArgs} args - Arguments to update many PostEntities.
+     * @example
+     * // Update many PostEntities
+     * const postEntity = await prisma.postEntity.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PostEntities and only return the `id`
+     * const postEntityWithIdOnly = await prisma.postEntity.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PostEntityUpdateManyAndReturnArgs>(args: SelectSubset<T, PostEntityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PostEntity.
+     * @param {PostEntityUpsertArgs} args - Arguments to update or create a PostEntity.
+     * @example
+     * // Update or create a PostEntity
+     * const postEntity = await prisma.postEntity.upsert({
+     *   create: {
+     *     // ... data to create a PostEntity
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PostEntity we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PostEntityUpsertArgs>(args: SelectSubset<T, PostEntityUpsertArgs<ExtArgs>>): Prisma__PostEntityClient<$Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PostEntities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostEntityCountArgs} args - Arguments to filter PostEntities to count.
+     * @example
+     * // Count the number of PostEntities
+     * const count = await prisma.postEntity.count({
+     *   where: {
+     *     // ... the filter for the PostEntities we want to count
+     *   }
+     * })
+    **/
+    count<T extends PostEntityCountArgs>(
+      args?: Subset<T, PostEntityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PostEntityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PostEntity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostEntityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PostEntityAggregateArgs>(args: Subset<T, PostEntityAggregateArgs>): Prisma.PrismaPromise<GetPostEntityAggregateType<T>>
+
+    /**
+     * Group by PostEntity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostEntityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PostEntityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PostEntityGroupByArgs['orderBy'] }
+        : { orderBy?: PostEntityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PostEntityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostEntityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PostEntity model
+   */
+  readonly fields: PostEntityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PostEntity.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PostEntityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PostEntity model
+   */
+  interface PostEntityFieldRefs {
+    readonly id: FieldRef<"PostEntity", 'Int'>
+    readonly content: FieldRef<"PostEntity", 'String'>
+    readonly title: FieldRef<"PostEntity", 'String'>
+    readonly created_at: FieldRef<"PostEntity", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PostEntity findUnique
+   */
+  export type PostEntityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostEntity
+     */
+    select?: PostEntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostEntity
+     */
+    omit?: PostEntityOmit<ExtArgs> | null
+    /**
+     * Filter, which PostEntity to fetch.
+     */
+    where: PostEntityWhereUniqueInput
+  }
+
+  /**
+   * PostEntity findUniqueOrThrow
+   */
+  export type PostEntityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostEntity
+     */
+    select?: PostEntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostEntity
+     */
+    omit?: PostEntityOmit<ExtArgs> | null
+    /**
+     * Filter, which PostEntity to fetch.
+     */
+    where: PostEntityWhereUniqueInput
+  }
+
+  /**
+   * PostEntity findFirst
+   */
+  export type PostEntityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostEntity
+     */
+    select?: PostEntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostEntity
+     */
+    omit?: PostEntityOmit<ExtArgs> | null
+    /**
+     * Filter, which PostEntity to fetch.
+     */
+    where?: PostEntityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PostEntities to fetch.
+     */
+    orderBy?: PostEntityOrderByWithRelationInput | PostEntityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PostEntities.
+     */
+    cursor?: PostEntityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PostEntities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PostEntities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PostEntities.
+     */
+    distinct?: PostEntityScalarFieldEnum | PostEntityScalarFieldEnum[]
+  }
+
+  /**
+   * PostEntity findFirstOrThrow
+   */
+  export type PostEntityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostEntity
+     */
+    select?: PostEntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostEntity
+     */
+    omit?: PostEntityOmit<ExtArgs> | null
+    /**
+     * Filter, which PostEntity to fetch.
+     */
+    where?: PostEntityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PostEntities to fetch.
+     */
+    orderBy?: PostEntityOrderByWithRelationInput | PostEntityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PostEntities.
+     */
+    cursor?: PostEntityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PostEntities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PostEntities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PostEntities.
+     */
+    distinct?: PostEntityScalarFieldEnum | PostEntityScalarFieldEnum[]
+  }
+
+  /**
+   * PostEntity findMany
+   */
+  export type PostEntityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostEntity
+     */
+    select?: PostEntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostEntity
+     */
+    omit?: PostEntityOmit<ExtArgs> | null
+    /**
+     * Filter, which PostEntities to fetch.
+     */
+    where?: PostEntityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PostEntities to fetch.
+     */
+    orderBy?: PostEntityOrderByWithRelationInput | PostEntityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PostEntities.
+     */
+    cursor?: PostEntityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PostEntities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PostEntities.
+     */
+    skip?: number
+    distinct?: PostEntityScalarFieldEnum | PostEntityScalarFieldEnum[]
+  }
+
+  /**
+   * PostEntity create
+   */
+  export type PostEntityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostEntity
+     */
+    select?: PostEntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostEntity
+     */
+    omit?: PostEntityOmit<ExtArgs> | null
+    /**
+     * The data needed to create a PostEntity.
+     */
+    data: XOR<PostEntityCreateInput, PostEntityUncheckedCreateInput>
+  }
+
+  /**
+   * PostEntity createMany
+   */
+  export type PostEntityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PostEntities.
+     */
+    data: PostEntityCreateManyInput | PostEntityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PostEntity createManyAndReturn
+   */
+  export type PostEntityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostEntity
+     */
+    select?: PostEntitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostEntity
+     */
+    omit?: PostEntityOmit<ExtArgs> | null
+    /**
+     * The data used to create many PostEntities.
+     */
+    data: PostEntityCreateManyInput | PostEntityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PostEntity update
+   */
+  export type PostEntityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostEntity
+     */
+    select?: PostEntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostEntity
+     */
+    omit?: PostEntityOmit<ExtArgs> | null
+    /**
+     * The data needed to update a PostEntity.
+     */
+    data: XOR<PostEntityUpdateInput, PostEntityUncheckedUpdateInput>
+    /**
+     * Choose, which PostEntity to update.
+     */
+    where: PostEntityWhereUniqueInput
+  }
+
+  /**
+   * PostEntity updateMany
+   */
+  export type PostEntityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PostEntities.
+     */
+    data: XOR<PostEntityUpdateManyMutationInput, PostEntityUncheckedUpdateManyInput>
+    /**
+     * Filter which PostEntities to update
+     */
+    where?: PostEntityWhereInput
+    /**
+     * Limit how many PostEntities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PostEntity updateManyAndReturn
+   */
+  export type PostEntityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostEntity
+     */
+    select?: PostEntitySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostEntity
+     */
+    omit?: PostEntityOmit<ExtArgs> | null
+    /**
+     * The data used to update PostEntities.
+     */
+    data: XOR<PostEntityUpdateManyMutationInput, PostEntityUncheckedUpdateManyInput>
+    /**
+     * Filter which PostEntities to update
+     */
+    where?: PostEntityWhereInput
+    /**
+     * Limit how many PostEntities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PostEntity upsert
+   */
+  export type PostEntityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostEntity
+     */
+    select?: PostEntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostEntity
+     */
+    omit?: PostEntityOmit<ExtArgs> | null
+    /**
+     * The filter to search for the PostEntity to update in case it exists.
+     */
+    where: PostEntityWhereUniqueInput
+    /**
+     * In case the PostEntity found by the `where` argument doesn't exist, create a new PostEntity with this data.
+     */
+    create: XOR<PostEntityCreateInput, PostEntityUncheckedCreateInput>
+    /**
+     * In case the PostEntity was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PostEntityUpdateInput, PostEntityUncheckedUpdateInput>
+  }
+
+  /**
+   * PostEntity delete
+   */
+  export type PostEntityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostEntity
+     */
+    select?: PostEntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostEntity
+     */
+    omit?: PostEntityOmit<ExtArgs> | null
+    /**
+     * Filter which PostEntity to delete.
+     */
+    where: PostEntityWhereUniqueInput
+  }
+
+  /**
+   * PostEntity deleteMany
+   */
+  export type PostEntityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PostEntities to delete
+     */
+    where?: PostEntityWhereInput
+    /**
+     * Limit how many PostEntities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PostEntity without action
+   */
+  export type PostEntityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostEntity
+     */
+    select?: PostEntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostEntity
+     */
+    omit?: PostEntityOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -1921,6 +3028,16 @@ export namespace Prisma {
   };
 
   export type UserEntityScalarFieldEnum = (typeof UserEntityScalarFieldEnum)[keyof typeof UserEntityScalarFieldEnum]
+
+
+  export const PostEntityScalarFieldEnum: {
+    id: 'id',
+    content: 'content',
+    title: 'title',
+    created_at: 'created_at'
+  };
+
+  export type PostEntityScalarFieldEnum = (typeof PostEntityScalarFieldEnum)[keyof typeof PostEntityScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -2065,6 +3182,55 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"UserEntity"> | Date | string
   }
 
+  export type PostEntityWhereInput = {
+    AND?: PostEntityWhereInput | PostEntityWhereInput[]
+    OR?: PostEntityWhereInput[]
+    NOT?: PostEntityWhereInput | PostEntityWhereInput[]
+    id?: IntFilter<"PostEntity"> | number
+    content?: StringFilter<"PostEntity"> | string
+    title?: StringFilter<"PostEntity"> | string
+    created_at?: DateTimeFilter<"PostEntity"> | Date | string
+  }
+
+  export type PostEntityOrderByWithRelationInput = {
+    id?: SortOrder
+    content?: SortOrder
+    title?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type PostEntityWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: PostEntityWhereInput | PostEntityWhereInput[]
+    OR?: PostEntityWhereInput[]
+    NOT?: PostEntityWhereInput | PostEntityWhereInput[]
+    content?: StringFilter<"PostEntity"> | string
+    title?: StringFilter<"PostEntity"> | string
+    created_at?: DateTimeFilter<"PostEntity"> | Date | string
+  }, "id">
+
+  export type PostEntityOrderByWithAggregationInput = {
+    id?: SortOrder
+    content?: SortOrder
+    title?: SortOrder
+    created_at?: SortOrder
+    _count?: PostEntityCountOrderByAggregateInput
+    _avg?: PostEntityAvgOrderByAggregateInput
+    _max?: PostEntityMaxOrderByAggregateInput
+    _min?: PostEntityMinOrderByAggregateInput
+    _sum?: PostEntitySumOrderByAggregateInput
+  }
+
+  export type PostEntityScalarWhereWithAggregatesInput = {
+    AND?: PostEntityScalarWhereWithAggregatesInput | PostEntityScalarWhereWithAggregatesInput[]
+    OR?: PostEntityScalarWhereWithAggregatesInput[]
+    NOT?: PostEntityScalarWhereWithAggregatesInput | PostEntityScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"PostEntity"> | number
+    content?: StringWithAggregatesFilter<"PostEntity"> | string
+    title?: StringWithAggregatesFilter<"PostEntity"> | string
+    created_at?: DateTimeWithAggregatesFilter<"PostEntity"> | Date | string
+  }
+
   export type UserEntityCreateInput = {
     email: string
     name: string
@@ -2115,6 +3281,52 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PostEntityCreateInput = {
+    content: string
+    title: string
+    created_at?: Date | string
+  }
+
+  export type PostEntityUncheckedCreateInput = {
+    id?: number
+    content: string
+    title: string
+    created_at?: Date | string
+  }
+
+  export type PostEntityUpdateInput = {
+    content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PostEntityUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PostEntityCreateManyInput = {
+    id?: number
+    content: string
+    title: string
+    created_at?: Date | string
+  }
+
+  export type PostEntityUpdateManyMutationInput = {
+    content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PostEntityUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -2271,6 +3483,35 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type PostEntityCountOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    title?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type PostEntityAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type PostEntityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    title?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type PostEntityMinOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    title?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type PostEntitySumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {

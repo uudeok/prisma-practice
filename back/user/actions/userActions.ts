@@ -6,18 +6,9 @@ import { CreateUserUsecase } from '../usecases/CreateUserUsecase';
 import { GetUserUsecase } from '../usecases/GetUserUsecase';
 import UserResDto from '@/dto/response/UserResDto';
 import { UserDto } from '../usecases/dto/UserDto';
+import { BaseError } from '@/errors/BaseError';
 
-export type Result<T> = { ok: boolean; error: AcionError; body?: T };
-
-// class AcionError extends Error {
-//     constructor(
-//         public errorCode: number,
-//         public statusCode: number,
-//         public message?: string,
-//     ) {
-//         super(this)
-//     }
-// }
+export type Result<T> = { ok: boolean; error?: BaseError; body?: T };
 
 export async function createUserAction(formData: UserCreateReqDto): Promise<UserResDto> {
     const prUserRepository = new PrUserRepository();
@@ -26,7 +17,6 @@ export async function createUserAction(formData: UserCreateReqDto): Promise<User
     try {
         return await createUserUsecase.execute(formData);
     } catch (error) {
-        return { ok: false, error: error, body: null };
         throw error;
     }
 }
@@ -41,39 +31,3 @@ export async function getUserAction(id: number): Promise<UserDto> {
         throw error;
     }
 }
-
-// export async function createUserAction(formData: UserCreateReqDto): Promise<Result<UserResDto, BaseError>> {
-//     const prUserRepository = new PrUserRepository();
-//     const createUserUsecase = new CreateUserUsecase(prUserRepository);
-
-//     try {
-//         return await createUserUsecase.execute(formData);
-//     } catch (error) {
-//         if (error instanceof BaseError) {
-//             return { ok: false, error };
-//         }
-
-//         return {
-//             ok: false,
-//             error: createAppError(ErrorCode.UNKNOWN),
-//         };
-//     }
-// }
-
-// export async function getUserAction(id: number): Promise<Result<UserDto, BaseError>> {
-//     const repository = new PrUserRepository();
-//     const usecase = new GetUserUsecase(repository);
-
-//     try {
-//         return await usecase.execute(id);
-//     } catch (error) {
-//         if (error instanceof BaseError) {
-//             return { ok: false, error };
-//         }
-
-//         return {
-//             ok: false,
-//             error: createAppError(ErrorCode.UNKNOWN),
-//         };
-//     }
-// }

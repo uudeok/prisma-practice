@@ -1,14 +1,12 @@
-import { getUserAction } from '@/back/user/actions/userActions';
-
-import SignupForm from './SingupForm';
+import SignupForm from '@/components/SingupForm';
+import Editor from '../components/Editor';
+import PlateEditor from '@/components/PlateEditor';
 
 export default async function Home() {
-    const user = await getUserAction(8);
-    console.log('user : ', user);
-
     return (
         <div>
-            <SignupForm />
+            <PlateEditor />
+            {/* <SignupForm /> <Editor /> */}
         </div>
     );
 }
