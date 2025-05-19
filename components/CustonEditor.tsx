@@ -1,114 +1,132 @@
 'use client';
 
 import styles from './CustomEditor.module.scss';
-import { useEffect, useState, useRef } from 'react';
-import MDEditor from '@uiw/react-md-editor';
-import Label from '@/shared/Label';
-import Input from '@/shared/Input';
-import { createPost, getPostDetail } from '@/back/posts/actions/postsActions';
-
-export type PostDto = {
-    id: number;
-    content: string;
-    title: string;
-    created_at: Date;
-};
+import { useState } from 'react';
+import MDEditor, { commands as defaultCommands, ICommand } from '@uiw/react-md-editor';
 
 function CustomEditor() {
     const [value, setValue] = useState<string | undefined>('');
     const [title, setTitle] = useState<string>('');
-    const [initialData, setInitialData] = useState<PostDto>();
 
-    console.log(initialData);
+    const submitPost = async () => {
+        if (!title || !value) return;
 
-    const editorRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const getInitialPost = async () => {
-            const data = await getPostDetail(1);
-            if (!data) return;
-            if (data) {
-                setInitialData(data);
-                setTitle(data.title);
-                setValue(data.content);
-            }
+        const newData = {
+            title: title,
+            content: value,
         };
 
-        getInitialPost();
-    }, []);
-
-    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-
-        if (!value || !title) return;
-
-        await createPost({ title, content: value });
-    };
-
-    const handleImageUpload = async (file: File): Promise<string> => {
-        // 여기에 S3 업로드 로직 넣기
-        const formData = new FormData();
-        formData.append('file', file);
-
-        // 예시: presigned URL을 받아서 업로드하는 방식
-        const { url, key } = await fetch('/api/get-presigned-url', {
+        const result = await fetch('/api/members/posts', {
             method: 'POST',
-            body: JSON.stringify({ filename: file.name }),
-            headers: { 'Content-Type': 'application/json' },
-        }).then((res) => res.json());
-
-        await fetch(url, {
-            method: 'PUT',
-            body: file,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newData),
         });
 
-        return `https://your-s3-bucket.s3.amazonaws.com/${key}`; // 실제 주소 리턴
+        console.log(result);
     };
 
-    const handleDrop = async (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
-        const file = event.dataTransfer.files?.[0];
-        if (file && file.type.startsWith('image/')) {
-            const url = await handleImageUpload(file);
-            insertImageMarkdown(url);
+    const handleImageUpload = async (files: File[]): Promise<string[]> => {
+        const formData = new FormData();
+        files.forEach((file) => {
+            formData.append('img', file); // 서버에서 'img' 필드로 받고 있으므로
+        });
+
+        const res = await fetch('/api/s3-upload', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (!res.ok) {
+            throw new Error('이미지 업로드 실패');
         }
+
+        const data = await res.json();
+        return Array.isArray(data.data) ? data.data : [data.data]; // 항상 배열로 반환
     };
 
-    const handlePaste = async (event: React.ClipboardEvent<HTMLDivElement>) => {
-        const file = Array.from(event.clipboardData.items)
-            .find((item) => item.type.startsWith('image/'))
-            ?.getAsFile();
-        if (file) {
-            const url = await handleImageUpload(file);
-            insertImageMarkdown(url);
-        }
+    const imageUploadCommand: ICommand = {
+        name: 'upload-image',
+        keyCommand: 'upload-image',
+        buttonProps: { 'aria-label': '이미지 업로드' },
+        icon: <span>이미지</span>,
+        execute: async (_state, api) => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.multiple = true;
+
+            input.onchange = async () => {
+                const files = input.files ? Array.from(input.files) : [];
+
+                if (files.length === 0) return;
+
+                const urls = await handleImageUpload(files);
+
+                const insertText = urls.map((url) => `![alt text](${url})`).join('\n');
+
+                // 👉 여러 이미지 마크다운 삽입
+                api.replaceSelection(insertText);
+
+                // 👉 커서 위치 조정
+                const newPosition = api.textArea.textLength;
+                api.setSelectionRange({
+                    start: newPosition,
+                    end: newPosition,
+                });
+            };
+
+            input.click();
+        },
     };
 
-    const insertImageMarkdown = (url: string) => {
-        const markdownImage = `![image](${url})`;
-        setValue((prev) => prev + `\n${markdownImage}`);
-    };
+    const customCommands: ICommand[] = [
+        defaultCommands.title1,
+        defaultCommands.title2,
+        defaultCommands.title3,
+        defaultCommands.title4,
+        defaultCommands.divider,
+        defaultCommands.bold,
+        defaultCommands.italic,
+        defaultCommands.strikethrough,
+        defaultCommands.divider,
+        defaultCommands.link,
+        imageUploadCommand,
+        defaultCommands.divider,
+        defaultCommands.code,
+        defaultCommands.quote,
+        defaultCommands.hr,
+        defaultCommands.unorderedListCommand,
+        defaultCommands.orderedListCommand,
+    ];
 
     return (
         <div className={styles.container}>
-            <Label label="작성하실 글의 제목을 지어주세요">
-                <Input variant="outlined" placeholder="제목" value={title} onChange={(e) => setTitle(e.target.value)} />
-            </Label>
+            <input
+                type="text"
+                placeholder="제목을 작성해주세요"
+                className={styles.titleInput}
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
+            />
 
-            <div
-                data-color-mode="light"
-                ref={editorRef}
-                className={styles.layout}
-                onDrop={handleDrop}
-                onPaste={handlePaste}
-                onDragOver={(e) => e.preventDefault()}
-            >
-                <MDEditor value={value} onChange={setValue} height={700} />
+            <div data-color-mode="light" className={styles.editorLayout}>
+                <MDEditor
+                    value={value}
+                    onChange={setValue}
+                    height={800}
+                    commands={customCommands}
+                    extraCommands={[]} // 오른쪽 툴바
+                    visibleDragbar={false} // 드래그 안보이도록
+                    enableScroll={true} // 스크롤
+                    textareaProps={{
+                        placeholder: '생각을 작성해주세요..',
+                    }}
+                />
             </div>
 
-            <button className={styles.btn} type="submit" onClick={handleSubmit}>
-                작성하기
-            </button>
+            <button onClick={submitPost}>발행하기</button>
         </div>
     );
 }

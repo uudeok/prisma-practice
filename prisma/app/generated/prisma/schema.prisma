@@ -17,8 +17,9 @@ model UserEntity {
 }
 
 model PostEntity {
-  id         Int      @id @default(autoincrement())
-  content    String
-  title      String
-  created_at DateTime @default(now())
+  id           Int      @id @default(autoincrement())
+  content      String
+  title        String
+  thumbnailUrl String?
+  createdAt    DateTime @default(now())
 }

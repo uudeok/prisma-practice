@@ -2013,21 +2013,24 @@ export namespace Prisma {
     id: number | null
     content: string | null
     title: string | null
-    created_at: Date | null
+    thumbnailUrl: string | null
+    createdAt: Date | null
   }
 
   export type PostEntityMaxAggregateOutputType = {
     id: number | null
     content: string | null
     title: string | null
-    created_at: Date | null
+    thumbnailUrl: string | null
+    createdAt: Date | null
   }
 
   export type PostEntityCountAggregateOutputType = {
     id: number
     content: number
     title: number
-    created_at: number
+    thumbnailUrl: number
+    createdAt: number
     _all: number
   }
 
@@ -2044,21 +2047,24 @@ export namespace Prisma {
     id?: true
     content?: true
     title?: true
-    created_at?: true
+    thumbnailUrl?: true
+    createdAt?: true
   }
 
   export type PostEntityMaxAggregateInputType = {
     id?: true
     content?: true
     title?: true
-    created_at?: true
+    thumbnailUrl?: true
+    createdAt?: true
   }
 
   export type PostEntityCountAggregateInputType = {
     id?: true
     content?: true
     title?: true
-    created_at?: true
+    thumbnailUrl?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -2152,7 +2158,8 @@ export namespace Prisma {
     id: number
     content: string
     title: string
-    created_at: Date
+    thumbnailUrl: string | null
+    createdAt: Date
     _count: PostEntityCountAggregateOutputType | null
     _avg: PostEntityAvgAggregateOutputType | null
     _sum: PostEntitySumAggregateOutputType | null
@@ -2178,31 +2185,35 @@ export namespace Prisma {
     id?: boolean
     content?: boolean
     title?: boolean
-    created_at?: boolean
+    thumbnailUrl?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["postEntity"]>
 
   export type PostEntitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     content?: boolean
     title?: boolean
-    created_at?: boolean
+    thumbnailUrl?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["postEntity"]>
 
   export type PostEntitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     content?: boolean
     title?: boolean
-    created_at?: boolean
+    thumbnailUrl?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["postEntity"]>
 
   export type PostEntitySelectScalar = {
     id?: boolean
     content?: boolean
     title?: boolean
-    created_at?: boolean
+    thumbnailUrl?: boolean
+    createdAt?: boolean
   }
 
-  export type PostEntityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "title" | "created_at", ExtArgs["result"]["postEntity"]>
+  export type PostEntityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "title" | "thumbnailUrl" | "createdAt", ExtArgs["result"]["postEntity"]>
 
   export type $PostEntityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PostEntity"
@@ -2211,7 +2222,8 @@ export namespace Prisma {
       id: number
       content: string
       title: string
-      created_at: Date
+      thumbnailUrl: string | null
+      createdAt: Date
     }, ExtArgs["result"]["postEntity"]>
     composites: {}
   }
@@ -2638,7 +2650,8 @@ export namespace Prisma {
     readonly id: FieldRef<"PostEntity", 'Int'>
     readonly content: FieldRef<"PostEntity", 'String'>
     readonly title: FieldRef<"PostEntity", 'String'>
-    readonly created_at: FieldRef<"PostEntity", 'DateTime'>
+    readonly thumbnailUrl: FieldRef<"PostEntity", 'String'>
+    readonly createdAt: FieldRef<"PostEntity", 'DateTime'>
   }
     
 
@@ -3034,7 +3047,8 @@ export namespace Prisma {
     id: 'id',
     content: 'content',
     title: 'title',
-    created_at: 'created_at'
+    thumbnailUrl: 'thumbnailUrl',
+    createdAt: 'createdAt'
   };
 
   export type PostEntityScalarFieldEnum = (typeof PostEntityScalarFieldEnum)[keyof typeof PostEntityScalarFieldEnum]
@@ -3189,14 +3203,16 @@ export namespace Prisma {
     id?: IntFilter<"PostEntity"> | number
     content?: StringFilter<"PostEntity"> | string
     title?: StringFilter<"PostEntity"> | string
-    created_at?: DateTimeFilter<"PostEntity"> | Date | string
+    thumbnailUrl?: StringNullableFilter<"PostEntity"> | string | null
+    createdAt?: DateTimeFilter<"PostEntity"> | Date | string
   }
 
   export type PostEntityOrderByWithRelationInput = {
     id?: SortOrder
     content?: SortOrder
     title?: SortOrder
-    created_at?: SortOrder
+    thumbnailUrl?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
   }
 
   export type PostEntityWhereUniqueInput = Prisma.AtLeast<{
@@ -3206,14 +3222,16 @@ export namespace Prisma {
     NOT?: PostEntityWhereInput | PostEntityWhereInput[]
     content?: StringFilter<"PostEntity"> | string
     title?: StringFilter<"PostEntity"> | string
-    created_at?: DateTimeFilter<"PostEntity"> | Date | string
+    thumbnailUrl?: StringNullableFilter<"PostEntity"> | string | null
+    createdAt?: DateTimeFilter<"PostEntity"> | Date | string
   }, "id">
 
   export type PostEntityOrderByWithAggregationInput = {
     id?: SortOrder
     content?: SortOrder
     title?: SortOrder
-    created_at?: SortOrder
+    thumbnailUrl?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
     _count?: PostEntityCountOrderByAggregateInput
     _avg?: PostEntityAvgOrderByAggregateInput
     _max?: PostEntityMaxOrderByAggregateInput
@@ -3228,7 +3246,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"PostEntity"> | number
     content?: StringWithAggregatesFilter<"PostEntity"> | string
     title?: StringWithAggregatesFilter<"PostEntity"> | string
-    created_at?: DateTimeWithAggregatesFilter<"PostEntity"> | Date | string
+    thumbnailUrl?: StringNullableWithAggregatesFilter<"PostEntity"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PostEntity"> | Date | string
   }
 
   export type UserEntityCreateInput = {
@@ -3287,47 +3306,54 @@ export namespace Prisma {
   export type PostEntityCreateInput = {
     content: string
     title: string
-    created_at?: Date | string
+    thumbnailUrl?: string | null
+    createdAt?: Date | string
   }
 
   export type PostEntityUncheckedCreateInput = {
     id?: number
     content: string
     title: string
-    created_at?: Date | string
+    thumbnailUrl?: string | null
+    createdAt?: Date | string
   }
 
   export type PostEntityUpdateInput = {
     content?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostEntityUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostEntityCreateManyInput = {
     id?: number
     content: string
     title: string
-    created_at?: Date | string
+    thumbnailUrl?: string | null
+    createdAt?: Date | string
   }
 
   export type PostEntityUpdateManyMutationInput = {
     content?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostEntityUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -3489,7 +3515,8 @@ export namespace Prisma {
     id?: SortOrder
     content?: SortOrder
     title?: SortOrder
-    created_at?: SortOrder
+    thumbnailUrl?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type PostEntityAvgOrderByAggregateInput = {
@@ -3500,14 +3527,16 @@ export namespace Prisma {
     id?: SortOrder
     content?: SortOrder
     title?: SortOrder
-    created_at?: SortOrder
+    thumbnailUrl?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type PostEntityMinOrderByAggregateInput = {
     id?: SortOrder
     content?: SortOrder
     title?: SortOrder
-    created_at?: SortOrder
+    thumbnailUrl?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type PostEntitySumOrderByAggregateInput = {

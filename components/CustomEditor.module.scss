@@ -1,20 +1,55 @@
 .container {
-    padding: 10px 30px;
+    padding: 30px;
     text-align: center;
     width: 1000px;
     margin: 0 auto;
-    background-color: #eceffe;
 }
 
-.layout {
-    margin-top: 20px;
+.editorLayout {
+    :global(.w-md-editor) {
+        /* 마크다운 커스텀*/
+        border: none;
+        box-shadow: none;
+    }
+
+    :global(.w-md-editor-preview) {
+        /* 미리보기 커스텀*/
+        background-color: #fbfdfc;
+        box-shadow: none;
+    }
+
+    :global(.w-md-editor-toolbar) {
+        /* 툴바 커스텀*/
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 8px 12px;
+        gap: 12px;
+        border: none;
+        height: 45px;
+        margin-bottom: 10px;
+    }
+
+    :global(.w-md-editor-toolbar button) {
+        /* 툴바 아이콘 커스텀*/
+        margin: 0 4px;
+        height: auto;
+        padding: 10px;
+        color: #333;
+
+        &:hover {
+            border-radius: 4px;
+        }
+    }
 }
 
-.btn {
+.titleInput {
+    box-sizing: border-box;
     border: none;
+    border-bottom: 1px solid lightgrey;
+    width: 100%;
+
+    font-size: 30px;
+    font-weight: 600;
+    outline: none;
     background-color: transparent;
     padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 20px;
 }

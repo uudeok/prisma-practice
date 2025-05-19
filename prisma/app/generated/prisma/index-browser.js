@@ -132,7 +132,8 @@ exports.Prisma.PostEntityScalarFieldEnum = {
   id: 'id',
   content: 'content',
   title: 'title',
-  created_at: 'created_at'
+  thumbnailUrl: 'thumbnailUrl',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
